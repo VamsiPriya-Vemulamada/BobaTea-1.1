@@ -1,6 +1,6 @@
 // screen width and height
-let availH = window.screen.availHeight;
-let availW = window.screen.availWidth;
+// let availH = window.screen.availHeight;
+// let availW = window.screen.availWidth;
 
 // creating a main element, the default navigation bar
 const mainEl = document.querySelector("main")
@@ -62,15 +62,59 @@ menuLinks.forEach(item => {
     a.textContent = item.text;
     topEl.appendChild(a);
 });
+// document.addEventListener("DOMContentLoaded", function() {
+// const imageEl = document.getElementById("image");
+// console.log(imageEl)
+// const img = document.createElement("img")
+// img.src = "";
 
-// Adding interactivity of sub sub menus
+// console.log(img.src)
+// img.width = "300" ;
+//  console.log(img.width)
+//  img.height = "200";
+// imageEl.appendChild(img);
+// });
+//Add EventListener
+const topMenuLinks = topEl.querySelectorAll("a");
+topEl.addEventListener("click", function (e) {
+  e.preventDefault();
+  if (!e.target.matches("a")) {
+    return;
+  }  
+  console.log(e.target.textContent);
+ topMenuLinks.forEach(item => {
+      item.classList.remove("active");
+    }  
+  )
+  e.target.classList.add("active")
+}); 
 
-const subEl = document.getElementById("sub- sub-menu");
-subEl.style.height = "100%";
-subEl.style.backgroundColor = "pink";
-subEl.setAttribute("class", "flex-around");
-subEl.style.position = "absolute";
-subEl.style.top = 0;// Grabbing all topMenuEl <a> elements
-const topMenuLinks = document.querySelectorAll("a");
+// Adding Submenu Interaction
+// const clickedLink = menuLinks.find(
+//   (link) => link.text === e.target.textContent
+// );
+// if (e.target.classList.contains("active") && clickedLink.subLinks) {
+//   subEl.style.top = "100%";
+//   buildSubMenu(clickedLink.subLinks);
+// } else {
+//   if (!clickedLink.subLinks) {
+//     subEl.style.top = "0";
+//   }
+ function buildSubMenu(subLinks) {
+  //Clear the current contents of subMenuEl.
+  subEl.innerHTML = "";
+  //Iterate over the subLinks array, passed as an argument, and for each "link" object:
+  subLinks.forEach((link) => {
+    //Create an <a> element.
+    const a = document.createElement("a");
+    //Add an href attribute to the <a>, with the value set by the href property of the "link" object.
+    a.setAttribute("href", link.href);
+    //Set the element's content to the value of the text property of the "link" object.
+    a.textContent = link.text;
+    //Append the new element to the subMenuEl.
+    subMenuEl.appendChild(a);
+  });
+}
+
 
 
